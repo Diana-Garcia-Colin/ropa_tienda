@@ -20,6 +20,7 @@
 </head>
 
 <body id="page-top">
+
 <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -27,8 +28,9 @@
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
+
             </div>
-            <div class="sidebar-brand-text mx-3">Fashion Store<sup></sup></div>
+            <div class="sidebar-brand-text mx-3">Fashion store<sup></sup></div>
         </a>
 
         <!-- Divider -->
@@ -201,7 +203,6 @@
     <div id="content-wrapper" class="d-flex flex-column">
         <!-- Main Content -->
         <div id="content">
-
 
             <!-- Topbar -->
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
