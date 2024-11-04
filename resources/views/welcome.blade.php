@@ -65,7 +65,7 @@
 
 <div class="welcome-card">
     <h1>Bienvenid@s a nuestra Tienda</h1>
-    <p>Hola Diana jsjs</p>
+    <p>Hola Diana jsjsss</p>
     <a href="{{ route('login') }}" class="btn btn-primary btn-custom">Iniciar Sesión</a>
     <a href="{{ route('register') }}" class="btn btn-secondary btn-custom">Registrar</a>
 </div>
