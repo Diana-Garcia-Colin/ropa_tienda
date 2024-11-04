@@ -25,10 +25,10 @@ class ProveedorController extends Controller
     {
         // Cargar proveedores con sus usuarios y empresas
         $proveedores = Proveedor::with(['user', 'empresa'])->paginate(10); // Cambia el número a tu preferencia
-    
+
         return view('admin.proveedores.index', compact('proveedores'));
     }
-    
+
 
 
     public function create()

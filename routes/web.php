@@ -17,7 +17,7 @@ use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\VentaController;
-
+use App\Http\Controllers\EntradaController;
 
 
 /*
@@ -63,6 +63,8 @@ Route::resource('/home/puestos', PuestoController::class);
 Route::resource('/home/tallas', TallaController::class);
 Route::resource('/home/ventas', TallaController::class);
 Route::resource('/home/productos', ProductoController::class);
+Route::resource('entradas', EntradaController::class);
+Route::resource('/admin/entradas', EntradaController::class);
 
 
 
