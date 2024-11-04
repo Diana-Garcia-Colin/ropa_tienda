@@ -26,7 +26,7 @@ class Producto extends Model
     // Relación con Marca
     public function marca()
     {
-        return $this->belongsTo(Marca::class, 'id_marca');
+        return $this->belongsTo(Marcas::class, 'id_marca');
     }
 
     // Relación con Categoria

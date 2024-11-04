@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('id tipo ropa')
+            $table->foreignId('id_tipo_ropa')
                 ->constrained('tipo_ropas')
                 ->onDelete('cascade'); // Eliminar productos si se elimina el tipo de ropa
 

@@ -13,6 +13,7 @@
             </div>
         </div>
     </div>
+    <div class="mb-3"></div>
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -20,46 +21,29 @@
         </div>
     @endif
 
-    @php
-        $i = 0; // Inicializar la variable $i
-    @endphp
-
-    <table class="table table-bordered">
-        <tr>
-            <th>No</th>
-            <th>Tipo de Ropa</th>
-            <th>Marca</th>
-            <th>Categoría</th>
-            <th>Precio</th>
-            <th>Imagen</th>
-            <th width="280px">Acciones</th>
-        </tr>
-
+    <div class="row">
         @foreach ($productos as $producto)
-            <tr>
-                <td>{{ ++$i }}</td>
-                <td>{{ $producto->tipoRopa->tipo ?? 'Sin tipo' }}</td>
-                <td>{{ $producto->marca->marca ?? 'Sin marca' }}</td>
-                <td>{{ $producto->categoria->categoria ?? 'Sin categoría' }}</td>
-                <td>{{ $producto->precio }}</td>
-                <td>
-                    @if($producto->imagen)
-                        <img src="{{ asset('storage/' . $producto->imagen) }}" alt="Imagen de producto" width="50">
-                    @else
-                        Sin imagen
-                    @endif
-                </td>
-                <td>
-                    <form action="{{ route('productos.destroy', $producto->id) }}" method="POST">
-                        <a class="btn btn-primary" href="{{ route('productos.edit', $producto->id) }}">Editar</a>
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                    </form>
-                </td>
-            </tr>
+            <div class="col-md-3 mb-4"> <!-- Cuatro tarjetas por fila -->
+                <div class="card">
+                    <img src="{{ $producto->imagen ? asset('storage/' . $producto->imagen) : 'ruta/a/imagen/placeholder.jpg' }}"
+                         class="card-img-top" alt="Imagen de producto"
+                         style="object-fit: contain; height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $producto->tipoRopa->tipo ?? 'Sin tipo' }}</h5>
+                        <p class="card-text">Marca: {{ $producto->marca->marca ?? 'Sin marca' }}</p>
+                        <p class="card-text">Categoría: {{ $producto->categoria->categoria ?? 'Sin categoría' }}</p>
+                        <p class="card-text">Precio: ${{ number_format($producto->precio, 2) }}</p>
+                        <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-primary">Editar</a>
+                        <form action="{{ route('productos.destroy', $producto->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         @endforeach
-    </table>
+    </div>
 
     {!! $productos->links() !!}
 

@@ -8,6 +8,8 @@ use App\Models\Marcas; // Importar modelo
 use App\Models\Categoria; // Importar modelo
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProductoController extends Controller
 {
@@ -28,7 +30,7 @@ class ProductoController extends Controller
         return view('admin.productos.create', compact('tipo_ropas', 'marcas', 'categorias')); // Pasa las variables a la vista
     }
     // Guardar un nuevo producto
-    
+
 public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -73,8 +75,14 @@ public function store(Request $request)
     // Mostrar el formulario de edición
     public function edit(Producto $producto)
     {
-        return view('admin.productos.edit', compact('producto'));
+        $tipo_ropas = Tipo_ropa::all(); // Obtener todos los tipos de ropa
+        $marcas = Marcas::all(); // Obtener todas las marcas
+        $categorias = Categoria::all(); // Obtener todas las categorías
+
+        return view('admin.productos.edit', compact('producto', 'tipo_ropas', 'marcas', 'categorias')); // Pasa todas las variables necesarias
     }
+
+
 
     // Actualizar un producto
     public function update(Request $request, $id)
