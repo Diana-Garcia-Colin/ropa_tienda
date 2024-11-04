@@ -30,15 +30,22 @@ class MarcasController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request): \Illuminate\Http\RedirectResponse
-    {
-        $request->validate([
-            'marca' => 'required|string|max:255',
-        ]);
+{
+    $request->validate([
+        'marca' => 'required|string|max:255',
+    ]);
 
-        Marcas::create($request->all());
-        return redirect()->route('marcas.index')
-            ->with('success', 'Marca creada con éxito.');
-    }
+    // Crea un nuevo registro en la tabla marcas
+    Marcas::create([
+        'marca' => $request->marca,
+    ]);
+
+    // Redirige con mensaje de éxito
+    return redirect()->route('marcas.index')
+        ->with('success', 'Marca creada con éxito.');
+}
+
+    
 
     /**
      * Display the specified resource.

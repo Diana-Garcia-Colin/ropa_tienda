@@ -19,6 +19,7 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\VentaController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,6 +62,7 @@ Route::resource('/home/empresas', EmpresaController::class);
 Route::resource('/home/puestos', PuestoController::class);
 Route::resource('/home/tallas', TallaController::class);
 Route::resource('/home/ventas', TallaController::class);
+Route::resource('/home/productos', ProductoController::class);
 
 
 
