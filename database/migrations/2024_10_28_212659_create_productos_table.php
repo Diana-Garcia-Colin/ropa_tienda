@@ -21,8 +21,9 @@ return new class extends Migration
             $table->decimal('precio', 10, 2); // Columna para el precio del producto
 
             // Clave foránea que referencia a la tabla 'marcas'
-            $table->foreignId('id_marca')
-                ->constrained('marcas')
+            $table->foreign('id_marca')
+                ->references('id')
+                ->on('marcas')
                 ->onDelete('cascade'); // Eliminar productos si se elimina la marca
 
             // Clave foránea que referencia a la tabla 'categorias'
