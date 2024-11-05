@@ -1,7 +1,7 @@
 @vite(['resources/js/bootstrap.js'])
 
 @vite(['resources/css/sb-admin-2.css'])
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -20,6 +20,7 @@
 </head>
 
 <body id="page-top">
+
 <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -27,8 +28,9 @@
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
+
             </div>
-            <div class="sidebar-brand-text mx-3">Fashion Store<sup></sup></div>
+            <div class="sidebar-brand-text mx-3">Fashion store<sup></sup></div>
         </a>
 
         <!-- Divider -->
@@ -126,13 +128,14 @@
         @endrole
 
 
-        <!-- Nav Item - Charts -->
+        @role('admin|cliente|empleado')
         <li class="nav-item">
             <a class="nav-link" href="/admin/productos">
                 <i class='bx bxs-cart'></i>
                 <span>Productos</span>
             </a>
         </li>
+        @endrole
 
         @role('admin')
         <li class="nav-item">
@@ -175,7 +178,7 @@
         </li>
         @endrole
 
-        @role('admin')
+        @role('admin|proveedor')
         <li class="nav-item">
             <a class="nav-link" href="/admin/entradas">
                 <i class="fas fa-tags"></i>
@@ -184,12 +187,14 @@
         </li>
         @endrole
 
+        @role('admin|proveedor')
         <li class="nav-item">
             <a class="nav-link" href="admin/asig_talla">
                 <i class="bx bx-log-out"></i>
                 <span>Asignar tallas</span>
             </a>
         </li>
+        @endrole
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
@@ -201,7 +206,6 @@
     <div id="content-wrapper" class="d-flex flex-column">
         <!-- Main Content -->
         <div id="content">
-
 
             <!-- Topbar -->
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">

@@ -10,7 +10,9 @@
             <th>Entrada</th>
             <th>Cantidad</th>
             <th>Talla</th>
+            @role('admin|empleado')
             <th>Acciones</th>
+            @endrole
         </tr>
         @foreach ($asigTallas as $asigTalla)
             <tr>
@@ -19,12 +21,14 @@
                 <td>{{ $asigTalla->cantidad }}</td>
                 <td>{{ $asigTalla->talla->talla }}</td>
                 <td>
+                    @role('admin|empleado')
                     <a href="{{ route('asig_talla.edit', $asigTalla->id) }}" class="btn btn-primary">Editar</a>
                     <form action="{{ route('asig_talla.destroy', $asigTalla->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
+                    @endrole
                 </td>
             </tr>
         @endforeach
