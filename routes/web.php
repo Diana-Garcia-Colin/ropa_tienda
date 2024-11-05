@@ -18,7 +18,7 @@ use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\VentaController;
 use App\Http\Controllers\EntradaController;
-
+use App\Http\Controllers\AsigTallaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,8 +65,7 @@ Route::resource('/home/ventas', TallaController::class);
 Route::resource('/home/productos', ProductoController::class);
 Route::resource('entradas', EntradaController::class);
 Route::resource('/admin/entradas', EntradaController::class);
-
-
+Route::resource('admin/asig_talla', AsigTallaController::class);
 
 Route::resource('admin/proveedores', ProveedorController::class);
 Route::resource('empleados', EmpleadoController::class);

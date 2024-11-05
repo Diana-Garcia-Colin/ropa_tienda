@@ -187,9 +187,9 @@
         @endrole
 
         <li class="nav-item">
-            <a class="nav-link" href="/">
+            <a class="nav-link" href="admin/asig_talla">
                 <i class="bx bx-log-out"></i>
-                <span>Home</span>
+                <span>Asignar tallas</span>
             </a>
         </li>
 
