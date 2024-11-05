@@ -43,11 +43,15 @@ class ProveedorController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'id_user' => 'required|exists:users,id', // Validación para el usuario
-            'id_empresa' => 'required|exists:empresas,id', // Validación para la empresa
+            'user_id' => 'required|exists:users,id', // Validación para el usuario
+            'id_empresa' => 'required|exists:empresas,id', // Cambia id_empresa a id
         ]);
-
-        Proveedor::create($validatedData); // Crea un nuevo proveedor
+    
+        Proveedor::create([
+            'user_id' => $validatedData['user_id'], 
+            'id_empresa' => $validatedData['id_empresa'], // Asegúrate de usar el id validado
+        ]);
+    
         return redirect()->route('proveedores.index')->with('success', 'Proveedor creado correctamente.');
     }
 
@@ -68,15 +72,15 @@ class ProveedorController extends Controller
 
 
     public function update(Request $request, Proveedor $proveedore)
-    {
-        $validatedData = $request->validate([
-            'id_user' => 'required|exists:users,id', // Validación para el usuario
-            'id_empresa' => 'required|exists:empresas,id', // Validación para la empresa
-        ]);
+{
+    $validatedData = $request->validate([
+        'id_user' => 'required|exists:users,id', // Cambia id_user a user_id
+        'id_empresa' => 'required|exists:empresas,id', // Cambia id_empresa a id
+    ]);
 
-        $proveedore->update($validatedData); // Actualiza el proveedor
-        return redirect()->route('proveedores.index')->with('success', 'Proveedor actualizado correctamente.');
-    }
+    $proveedore->update($validatedData);
+    return redirect()->route('proveedores.index')->with('success', 'Proveedor actualizado correctamente.');
+}
 
 
     public function destroy(Proveedor $proveedore)

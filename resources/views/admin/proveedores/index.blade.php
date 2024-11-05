@@ -23,7 +23,7 @@
         <tr>
             <th>ID Proveedor</th>
             <th>Usuario</th>
-            <th>Marca</th>
+            <th>Empresa</th>
             <th>Acciones</th>
         </tr>
         </thead>
@@ -35,7 +35,7 @@
                 <td>{{ $proveedor->empresa->nom_e }}</td> <!-- Accediendo al nombre de la empresa -->
                 <td>
                     <form action="{{ route('proveedores.destroy', $proveedor->id_proveedor) }}" method="POST">
-                        <a class="btn btn-info" href="{{ route('proveedores.show', $proveedor->id_proveedor) }}">Mostrar</a>
+                       
                         <a class="btn btn-primary" href="{{ route('proveedores.edit', $proveedor->id_proveedor) }}">Editar</a>
 
                         @csrf

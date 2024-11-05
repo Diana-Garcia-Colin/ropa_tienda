@@ -40,7 +40,7 @@
                     <td>{{ $entrada->precio_entrada }}</td>
                     <td>{{ $entrada->fecha_entrada }}</td>
                     <td>
-                        <a class="btn btn-info" href="{{ route('entradas.show', $entrada->id) }}">Ver</a>
+                       
                         <a class="btn btn-primary" href="{{ route('entradas.edit', $entrada->id) }}">Editar</a>
                         <form action="{{ route('entradas.destroy', $entrada->id) }}" method="POST" style="display:inline;">
                             @csrf

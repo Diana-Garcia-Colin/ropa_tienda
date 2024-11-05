@@ -30,7 +30,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Usuario:</strong>
-                    <select name="id_user" class="form-control">
+                    <select name="user_id" class="form-control"> <!-- Cambiado a user_id -->
                         <option value="">Seleccione un Usuario</option>
                         @foreach ($users as $user)
                             <option value="{{ $user->id }}">{{ $user->name }}</option>
