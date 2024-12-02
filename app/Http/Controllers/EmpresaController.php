@@ -8,16 +8,16 @@ use Illuminate\Http\Request;
 class EmpresaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Muestra una lista de todas las empresas.
      */
     public function index()
     {
-        $empresas = Empresa::paginate(10); // Cambia 10 por el número de elementos que desees mostrar por página
+        $empresas = Empresa::paginate(10); // Cambia 10 por el número deseado de elementos por página
         return view('admin.empresas.index', compact('empresas'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra el formulario para crear una nueva empresa.
      */
     public function create()
     {
@@ -25,25 +25,26 @@ class EmpresaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Almacena una nueva empresa en la base de datos.
      */
     public function store(Request $request)
     {
+        // Validar los datos de entrada
         $request->validate([
-            'nom_e' => 'required|string|max:255',
+            'nom_e' => 'required|string|max:255|unique:empresas,nom_e',
         ]);
 
-        // Crear un nuevo producto
+        // Crear una nueva empresa
         Empresa::create([
             'nom_e' => $request->nom_e,
         ]);
 
-        // Redirigir a la lista de productos con un mensaje de éxito
-        return redirect()->route('empresas.index')->with('success', 'Empresa created successfully.');
+        // Redirigir con un mensaje de éxito
+        return redirect()->route('empresas.index')->with('success', 'Empresa creada exitosamente.');
     }
 
     /**
-     * Display the specified resource.
+     * Muestra los detalles de una empresa específica.
      */
     public function show(Empresa $empresa)
     {
@@ -51,7 +52,7 @@ class EmpresaController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Muestra el formulario para editar una empresa.
      */
     public function edit(Empresa $empresa)
     {
@@ -59,29 +60,32 @@ class EmpresaController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza los datos de una empresa en la base de datos.
      */
     public function update(Request $request, Empresa $empresa)
     {
+        // Validar los datos de entrada
         $request->validate([
-            'nom_e' => 'required|string|max:255',
+            'nom_e' => 'required|string|max:255|unique:empresas,nom_e,' . $empresa->id,
         ]);
 
-        // Actualizar el producto
-        $empresa->update($request->only('nom_e'));
+        // Actualizar la empresa
+        $empresa->update([
+            'nom_e' => $request->nom_e,
+        ]);
 
-        // Redirigir con mensaje de éxito
-        return redirect()->route('empresas.index')->with('success', 'Empresa updated successfully.');
+        // Redirigir con un mensaje de éxito
+        return redirect()->route('empresas.index')->with('success', 'Empresa actualizada exitosamente.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina una empresa de la base de datos.
      */
     public function destroy(Empresa $empresa)
     {
         $empresa->delete();
 
-        // Redirigir a la lista de productos con un mensaje de éxito
-        return redirect()->route('empresas.index')->with('success', 'Empresa deleted successfully.');
+        // Redirigir con un mensaje de éxito
+        return redirect()->route('empresas.index')->with('success', 'Empresa eliminada exitosamente.');
     }
 }

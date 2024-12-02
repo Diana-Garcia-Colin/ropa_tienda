@@ -27,9 +27,7 @@
             <th>Producto</th>
             <th>Precio de Entrada</th>
             <th>Fecha de Entrada</th>
-            @role('admin')
             <th width="280px">Acciones</th>
-            @endrole
         </tr>
         </thead>
         <tbody>
@@ -42,15 +40,13 @@
                     <td>{{ $entrada->precio_entrada }}</td>
                     <td>{{ $entrada->fecha_entrada }}</td>
                     <td>
-
-                        @role('admin')
+                       
                         <a class="btn btn-primary" href="{{ route('entradas.edit', $entrada->id) }}">Editar</a>
                         <form action="{{ route('entradas.destroy', $entrada->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Eliminar</button>
                         </form>
-                        @endrole
                     </td>
                 </tr>
             @endforeach

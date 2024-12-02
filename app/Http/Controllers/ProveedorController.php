@@ -46,12 +46,12 @@ class ProveedorController extends Controller
             'user_id' => 'required|exists:users,id', // Validación para el usuario
             'id_empresa' => 'required|exists:empresas,id', // Cambia id_empresa a id
         ]);
-    
+
         Proveedor::create([
-            'user_id' => $validatedData['user_id'], 
+            'user_id' => $validatedData['user_id'],
             'id_empresa' => $validatedData['id_empresa'], // Asegúrate de usar el id validado
         ]);
-    
+
         return redirect()->route('proveedores.index')->with('success', 'Proveedor creado correctamente.');
     }
 
@@ -64,23 +64,34 @@ class ProveedorController extends Controller
     public function edit($id)
     {
         $proveedor = Proveedor::findOrFail($id);
-        $users = User::role('empleado')->get(); // Obtiene solo usuarios con rol 'empleado'
-        $empresas = Empresa::all(); // Obtiene todas las empresas
+
+        // Obtener solo usuarios con el rol de proveedor
+        $users = User::role('proveedor')->get();
+
+        // Obtener todas las empresas
+        $empresas = Empresa::all();
 
         return view('admin.proveedores.edit', compact('proveedor', 'users', 'empresas'));
     }
 
 
-    public function update(Request $request, Proveedor $proveedore)
-{
-    $validatedData = $request->validate([
-        'id_user' => 'required|exists:users,id', // Cambia id_user a user_id
-        'id_empresa' => 'required|exists:empresas,id', // Cambia id_empresa a id
-    ]);
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id', // Asegúrate de que sea user_id
+            'id_empresa' => 'required|exists:empresas,id',
+        ]);
 
-    $proveedore->update($validatedData);
-    return redirect()->route('proveedores.index')->with('success', 'Proveedor actualizado correctamente.');
-}
+        $proveedor = Proveedor::findOrFail($id);
+
+        // Actualiza los datos del proveedor
+        $proveedor->update([
+            'user_id' => $request->user_id, // Asegúrate de usar user_id
+            'id_empresa' => $request->id_empresa,
+        ]);
+
+        return redirect()->route('proveedores.index')->with('success', 'Proveedor actualizado correctamente.');
+    }
 
 
     public function destroy(Proveedor $proveedore)

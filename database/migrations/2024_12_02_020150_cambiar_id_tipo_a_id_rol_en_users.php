@@ -6,21 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up()
+    public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('approved')->default(false);
+            $table->renameColumn('id_tipo', 'id_rol');
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('approved');
+            $table->renameColumn('id_rol', 'id_tipo');
         });
     }
-
 };

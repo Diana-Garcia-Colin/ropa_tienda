@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('precio', 10, 2); // Columna para el precio del producto
 
             // Clave foránea que referencia a la tabla 'marcas'
+            $table->unsignedBigInteger('id_marca');
             $table->foreign('id_marca')
                 ->references('id')
                 ->on('marcas')

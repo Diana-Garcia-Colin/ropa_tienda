@@ -13,6 +13,6 @@
             </div>
         @endif
 
-        <a href="{{ url('/home') }}" class="btn btn-primary mt-4">Volver a Inicio</a>
+        <a href="{{ route('logout') }}" class="btn btn-primary mt-4">Volver a Inicio</a>
     </div>
 @endsection

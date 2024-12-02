@@ -8,9 +8,7 @@
                 <h2>Productos</h2>
             </div>
             <div class="pull-right">
-                @role('admin|empleado')
                 <a class="btn btn-success" href="{{ route('productos.create') }}"> Crear nuevo producto</a>
-                @endrole
                 <a class="btn btn-primary" href="{{ route('home') }}"> Volver</a>
             </div>
         </div>
@@ -35,15 +33,12 @@
                         <p class="card-text">Marca: {{ $producto->marca->marca ?? 'Sin marca' }}</p>
                         <p class="card-text">Categoría: {{ $producto->categoria->categoria ?? 'Sin categoría' }}</p>
                         <p class="card-text">Precio: ${{ number_format($producto->precio, 2) }}</p>
-
-                        @role('admin|empleado')
                         <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-primary">Editar</a>
                         <form action="{{ route('productos.destroy', $producto->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Eliminar</button>
                         </form>
-                        @endrole
                     </div>
                 </div>
             </div>

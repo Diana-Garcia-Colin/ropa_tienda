@@ -128,14 +128,13 @@
         @endrole
 
 
-        @role('admin|cliente|empleado')
+        <!-- Nav Item - Charts -->
         <li class="nav-item">
             <a class="nav-link" href="/admin/productos">
                 <i class='bx bxs-cart'></i>
                 <span>Productos</span>
             </a>
         </li>
-        @endrole
 
         @role('admin')
         <li class="nav-item">
@@ -187,14 +186,12 @@
         </li>
         @endrole
 
-        @role('admin|proveedor')
         <li class="nav-item">
             <a class="nav-link" href="admin/asig_talla">
                 <i class="bx bx-log-out"></i>
                 <span>Asignar tallas</span>
             </a>
         </li>
-        @endrole
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">

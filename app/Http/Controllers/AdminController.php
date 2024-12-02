@@ -18,6 +18,9 @@ class AdminController extends Controller
         $user->approved = true;
         $user->save();
 
+        // Llamar al procedimiento almacenado
+        \DB::statement('CALL AssignRoleToTable(?, ?)', [$user->id, $role->name]);
+
         return redirect()->back()->with('success', 'Usuario aprobado y rol asignado correctamente.');
     }
     // AdminController.php

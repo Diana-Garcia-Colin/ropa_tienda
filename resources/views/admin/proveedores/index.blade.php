@@ -22,7 +22,7 @@
         <thead>
         <tr>
             <th>ID Proveedor</th>
-            <th>Usuario</th>
+            <th>Nombre Completo</th>
             <th>Empresa</th>
             <th>Acciones</th>
         </tr>
@@ -31,11 +31,15 @@
         @foreach ($proveedores as $proveedor)
             <tr>
                 <td>{{ $proveedor->id_proveedor }}</td>
-                <td>{{ $proveedor->user->name }}</td> <!-- Accediendo al nombre del usuario -->
-                <td>{{ $proveedor->empresa->nom_e }}</td> <!-- Accediendo al nombre de la empresa -->
+                <td>
+                    {{ $proveedor->user->name }} {{ $proveedor->user->ap }} {{ $proveedor->user->am }}
+                </td> <!-- Muestra el nombre completo del usuario -->
+                <td>
+                    {{ $proveedor->empresa?->nom_e ?? 'Sin empresa asignada' }}
+                </td> <!-- Muestra el nombre de la empresa o 'Sin empresa asignada' -->
                 <td>
                     <form action="{{ route('proveedores.destroy', $proveedor->id_proveedor) }}" method="POST">
-                       
+
                         <a class="btn btn-primary" href="{{ route('proveedores.edit', $proveedor->id_proveedor) }}">Editar</a>
 
                         @csrf
