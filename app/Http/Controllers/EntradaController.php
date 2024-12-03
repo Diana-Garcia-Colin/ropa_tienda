@@ -6,28 +6,41 @@ use App\Models\Proveedor;
 use App\Models\Producto;
 use App\Models\Entrada;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Auth;
 class EntradaController extends Controller
 {
     public function index()
     {
-        // Cargar entradas con las relaciones de proveedor y producto
-        $entradas = Entrada::with(['proveedor', 'producto'])->paginate(10);
+        // Obtener el usuario actualmente autenticado
+        $user = auth()->user();
+
+        // Verificar si el usuario tiene el rol de administrador (id_rol == 1)
+        if ($user->id_rol == 1) {
+            $entradas = Entrada::with(['proveedor', 'producto'])->paginate(10); // Obtener todas las entradas
+        } else {
+            // Si no es admin, solo obtener las entradas asociadas al proveedor del usuario
+            $entradas = Entrada::whereHas('proveedor', function ($query) {
+                $query->where('user_id', auth()->id());
+            })->with(['proveedor', 'producto'])->paginate(10);
+        }
 
         return view('admin.entradas.index', compact('entradas'));
     }
 
 
-
     public function create()
     {
-        // Cargar proveedores con la relación del usuario
-        $proveedores = Proveedor::with('user')->get();
-        // Cargar productos con la relación de tipo de ropa
+        // Obtener solo el proveedor asociado al usuario autenticado
+        $proveedor = Proveedor::where('user_id', auth()->id())->first();  // Obtén solo el primer proveedor del usuario
+        if (!$proveedor) {
+            return redirect()->route('proveedores.create')->with('error', 'No se encontró un proveedor asociado.');
+        }
+        // Obtener todos los productos disponibles
         $productos = Producto::with('tipoRopa')->get();
 
-        return view('admin.entradas.create', compact('proveedores', 'productos'));
+        return view('admin.entradas.create', compact('proveedor', 'productos'));
     }
+
 
 
 
@@ -55,12 +68,17 @@ class EntradaController extends Controller
 
     public function edit(Entrada $entrada)
     {
-        // Cargar proveedores y productos
-        $proveedores = Proveedor::with('user')->get(); // Asegúrate de que el modelo Proveedor tiene la relación con el modelo User.
-        $productos = Producto::with('tipoRopa')->get(); // Asegúrate de que el modelo Producto tiene la relación con tipoRopa.
+        $proveedor = Proveedor::where('user_id', auth()->id())->first();
 
-        return view('admin.entradas.edit', compact('entrada', 'proveedores', 'productos'));
+        if (!$proveedor) {
+            return redirect()->route('proveedores.create')->with('error', 'No se encontró un proveedor asociado.');
+        }
+        // Obtener productos disponibles
+        $productos = Producto::with('tipoRopa')->get();
+
+        return view('admin.entradas.edit', compact('entrada', 'proveedor', 'productos'));
     }
+
 
 
     public function update(Request $request, Entrada $entrada)

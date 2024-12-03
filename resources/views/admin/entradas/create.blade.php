@@ -33,13 +33,11 @@
                 <div class="form-group">
                     <strong>Proveedor:</strong>
                     <select name="id_proveedor" id="id_proveedor" class="form-control" required>
-                        <option value="">Seleccione un proveedor</option>
-                        @foreach ($proveedores as $proveedor)
-                            <option value="{{ $proveedor->id_proveedor }}">{{ $proveedor->user->name }}</option>
-                        @endforeach
+                        <option value="{{ $proveedor->id_proveedor }}" selected>{{ $proveedor->user->name }}</option>
                     </select>
                 </div>
             </div>
+
 
             <!-- Producto -->
             <div class="col-xs-12 col-sm-12 col-md-12">

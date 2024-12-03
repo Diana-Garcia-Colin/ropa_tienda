@@ -19,6 +19,8 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\EntradaController;
 use App\Http\Controllers\AsigTallaController;
 use App\Http\Controllers\VentaController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
 
 
 
@@ -49,6 +51,7 @@ Auth::routes();
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::match(['get', 'post'], '/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 
 // Rutas de autenticación
