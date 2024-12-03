@@ -190,6 +190,18 @@
                 <span>Asignar tallas</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/tickets">
+                <i class='bx bxs-cart'></i>
+                <span>Tickets</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="admin/venta">
+                <i class="bx bx-log-out"></i>
+                <span>Ventas</span>
+            </a>
+        </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
@@ -229,7 +241,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                {{ Auth::user()->name }} {{ Auth::user()->ap ?? '' }} {{ Auth::user()->am ?? '' }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"

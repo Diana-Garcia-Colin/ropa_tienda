@@ -34,8 +34,16 @@
             <tr>
                 <td>{{ $ticket->id_ticket }}</td>
                 <td>{{ $ticket->fecha_ventas }}</td>
-                <td>{{ $ticket->cliente->user->name }}</td>
-                <td>{{ $ticket->empleado->user->name }}</td>
+                <td>
+                    {{ $ticket->cliente->user->name }} 
+                    {{ $ticket->cliente->user->ap }} 
+                    {{ $ticket->cliente->user->am }}
+                </td> <!-- Muestra el nombre completo del cliente -->
+                <td>
+                    {{ $ticket->empleado->user->name }} 
+                    {{ $ticket->empleado->user->ap }} 
+                    {{ $ticket->empleado->user->am }}
+                </td> <!-- Muestra el nombre completo del empleado -->
                 <td>{{ $ticket->total }}</td>
                 <td>
                     <form action="{{ route('tickets.destroy', $ticket->id_ticket) }}" method="POST">

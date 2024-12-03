@@ -18,8 +18,7 @@ use App\Http\Controllers\Tipo_ropaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\EntradaController;
 use App\Http\Controllers\AsigTallaController;
-
-
+use App\Http\Controllers\VentaController;
 
 
 
@@ -68,8 +67,9 @@ Route::resource('/admin/entradas', EntradaController::class);
 Route::resource('/admin/admin/asig_talla', AsigTallaController::class);
 Route::resource('/admin/entradas', EntradaController::class);
 Route::resource('/admin/productos', ProductoController::class);
-
-
+Route::resource('/admin/venta', VentaController::class);
+Route::resource('/ventas/admin/venta', VentaController::class);
+Route::resource('ventas', VentaController::class);
 
 Route::resource('admin/proveedores', ProveedorController::class);
 Route::get('/proveedores', [ProveedorController::class, 'proveedorUsers'])->name('proveedores.index');
@@ -127,4 +127,6 @@ Route::resource('empleados', EmpleadoController::class);
 
 Route::get('/admin/tickets', [TicketController::class, 'index'])->name('admin.tickets');
 Route::resource('tickets', TicketController::class);
+Route::resource('categorias', CategoriaController::class);
+
 

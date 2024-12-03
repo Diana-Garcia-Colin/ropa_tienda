@@ -43,7 +43,7 @@
                         <option value="">Seleccione un Cliente</option>
                         @foreach ($clientes as $cliente)
                             <option value="{{ $cliente->id_cliente }}" {{ $cliente->id_cliente == $ticket->id_cliente ? 'selected' : '' }}>
-                                {{ $cliente->user->name }}
+                                {{ $cliente->user->name }} {{ $cliente->user->ap }} {{ $cliente->user->am }} <!-- Muestra nombre completo del cliente -->
                             </option>
                         @endforeach
                     </select>
@@ -58,7 +58,7 @@
                         <option value="">Seleccione un Empleado</option>
                         @foreach ($empleados as $empleado)
                             <option value="{{ $empleado->id_empleado }}" {{ $empleado->id_empleado == $ticket->id_empleado ? 'selected' : '' }}>
-                                {{ $empleado->user->name }}
+                                {{ $empleado->user->name }} {{ $empleado->user->ap }} {{ $empleado->user->am }} <!-- Muestra nombre completo del empleado -->
                             </option>
                         @endforeach
                     </select>
