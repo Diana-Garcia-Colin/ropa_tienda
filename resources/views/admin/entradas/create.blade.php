@@ -30,13 +30,22 @@
         <div class="row">
             <!-- Proveedor -->
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Proveedor:</strong>
-                    <select name="id_proveedor" id="id_proveedor" class="form-control" required>
-                        <option value="{{ $proveedor->id_proveedor }}" selected>{{ $proveedor->user->name }}</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <strong>Proveedor:</strong>
+                <select name="id_proveedor" id="id_proveedor" class="form-control" required>
+                    <option value="">Seleccione un proveedor</option>
+                    @foreach ($proveedores as $proveedor)
+                        <option value="{{ $proveedor->id_proveedor }}">
+                            {{
+                                $proveedor->user->name . ' ' . 
+                                ($proveedor->user->ap ?? '') . ' ' . 
+                                ($proveedor->user->am ?? '')
+                            }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
+        </div>
 
 
             <!-- Producto -->

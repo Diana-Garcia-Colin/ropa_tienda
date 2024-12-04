@@ -35,7 +35,11 @@
             @foreach ($entradas as $entrada)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $entrada->proveedor->user->name ?? 'N/A' }}</td> <!-- Asegúrate que este sea el campo correcto -->
+                    <td>
+                {{ $entrada->proveedor->user->name ?? 'N/A' }} 
+                {{ $entrada->proveedor->user->ap ?? '' }}
+                {{ $entrada->proveedor->user->am ?? '' }}
+            </td>
                     <td>{{ $entrada->producto->tipoRopa->tipo ?? 'N/A' }}</td> <!-- Asegúrate que este sea el campo correcto -->
                     <td>{{ $entrada->precio_entrada }}</td>
                     <td>{{ $entrada->fecha_entrada }}</td>

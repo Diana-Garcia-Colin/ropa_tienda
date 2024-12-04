@@ -13,18 +13,22 @@ class VentaController extends Controller
     // Mostrar todas las ventas
     public function index()
     {
-        $ventas = Venta::with(['ticket', 'producto', 'asigTalla'])->get();
-        return view('admin.ventas.index', compact('ventas')); // Vista de ventas en el admin
+        // Eager Loading para incluir todas las relaciones necesarias
+        $ventas = Venta::with(['ticket', 'producto.tipoRopa', 'asigTalla.talla'])->get();
+
+        // Retornar la vista con las ventas
+        return view('admin.ventas.index', compact('ventas'));
     }
 
     // Mostrar el formulario para crear una nueva venta
     public function create()
     {
         $tickets = Ticket::all(); // Todos los tickets
-        $productos = Producto::all(); // Todos los productos
-        $asigTallas = AsigTalla::all(); // Todas las asignaciones de tallas
+        $productos = Producto::with('tipoRopa')->get(); // Todos los productos con su tipo de ropa
+        $asigTallas = AsigTalla::with('talla')->get(); // Todas las asignaciones de tallas con sus tallas
 
-        return view('admin.ventas.create', compact('tickets', 'productos', 'asigTallas')); // Vista para crear ventas
+        // Retornar la vista para crear ventas
+        return view('admin.ventas.create', compact('tickets', 'productos', 'asigTallas'));
     }
 
     // Almacenar una nueva venta
@@ -41,23 +45,27 @@ class VentaController extends Controller
 
         // Crear la venta
         Venta::create($request->all());
+
+        // Redirigir al listado de ventas con un mensaje de éxito
         return redirect()->route('ventas.index')->with('success', 'Venta creada exitosamente.');
     }
 
     // Mostrar detalles de una venta específica
     public function show(Venta $venta)
     {
-        return view('admin.ventas.show', compact('venta')); // Vista de detalles de venta
+        // Retornar la vista con los detalles de la venta
+        return view('admin.ventas.show', compact('venta'));
     }
 
     // Mostrar el formulario para editar una venta
     public function edit(Venta $venta)
     {
         $tickets = Ticket::all(); // Todos los tickets
-        $productos = Producto::all(); // Todos los productos
-        $asigTallas = AsigTalla::all(); // Todas las asignaciones de tallas
+        $productos = Producto::with('tipoRopa')->get(); // Todos los productos con su tipo de ropa
+        $asigTallas = AsigTalla::with('talla')->get(); // Todas las asignaciones de tallas con sus tallas
 
-        return view('admin.ventas.edit', compact('venta', 'tickets', 'productos', 'asigTallas')); // Vista para editar ventas
+        // Retornar la vista para editar la venta
+        return view('admin.ventas.edit', compact('venta', 'tickets', 'productos', 'asigTallas'));
     }
 
     // Actualizar los detalles de una venta
@@ -74,13 +82,18 @@ class VentaController extends Controller
 
         // Actualizar la venta
         $venta->update($request->all());
+
+        // Redirigir al listado de ventas con un mensaje de éxito
         return redirect()->route('ventas.index')->with('success', 'Venta actualizada exitosamente.');
     }
 
     // Eliminar una venta
     public function destroy(Venta $venta)
     {
+        // Eliminar la venta
         $venta->delete();
+
+        // Redirigir al listado de ventas con un mensaje de éxito
         return redirect()->route('ventas.index')->with('success', 'Venta eliminada exitosamente.');
     }
 }
