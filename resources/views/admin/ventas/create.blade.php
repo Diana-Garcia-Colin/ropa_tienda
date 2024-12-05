@@ -20,10 +20,13 @@
             <label for="id_producto" class="form-label">Producto (Tipo de Ropa)</label>
             <select name="id_producto" id="id_producto" class="form-control">
                 @foreach ($productos as $producto)
-                    <option value="{{ $producto->id }}">{{ $producto->tipoRopa->tipo ?? 'Sin tipo de ropa' }}</option>
+                    <option value="{{ $producto->id }}" data-precio="{{ $producto->precio }}">
+                        {{ $producto->tipoRopa->tipo ?? 'Sin tipo de ropa' }} - ${{ $producto->precio }}
+                    </option>
                 @endforeach
             </select>
         </div>
+
 
         {{-- Selección de asignación de talla --}}
         <div class="mb-3">
@@ -51,4 +54,21 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a href="{{ route('ventas.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const productoSelect = document.getElementById('id_producto');
+            const cantidadInput = document.getElementById('cantidad');
+            const subtotalInput = document.getElementById('subtotal');
+
+            function actualizarSubtotal() {
+                const precio = parseFloat(productoSelect.selectedOptions[0].getAttribute('data-precio')) || 0;
+                const cantidad = parseInt(cantidadInput.value) || 0;
+                subtotalInput.value = (precio * cantidad).toFixed(2);
+            }
+
+            productoSelect.addEventListener('change', actualizarSubtotal);
+            cantidadInput.addEventListener('input', actualizarSubtotal);
+        });
+    </script>
 @endsection

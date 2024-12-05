@@ -43,6 +43,7 @@ class VentaController extends Controller
             'subtotal' => 'required|numeric|min:0',
         ]);
 
+
         // Crear la venta
         Venta::create($request->all());
 

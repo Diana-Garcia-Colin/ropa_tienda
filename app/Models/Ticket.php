@@ -23,4 +23,10 @@ class Ticket extends Model
     {
         return $this->belongsTo(Empleado::class, 'id_empleado'); // Relación con empleado
     }
+
+    public function ventas()
+    {
+        return $this->hasMany(Venta::class, 'id_ticket');
+    }
+
 }

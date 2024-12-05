@@ -11,9 +11,15 @@ class TicketController extends Controller
 {
     public function index()
     {
-        $tickets = Ticket::with(['cliente.user', 'empleado.user'])->paginate(10); // Lista tickets con clientes y empleados
+        $tickets = Ticket::with([
+            'cliente.user',
+            'empleado.user',
+            'ventas.producto.tipoRopa' // Agrega tipoRopa
+        ])->paginate(10);
+
         return view('admin.tickets.index', compact('tickets'));
     }
+
 
     public function create()
     {

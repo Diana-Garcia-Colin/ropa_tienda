@@ -100,14 +100,7 @@
         </li>
         @endrole
 
-        @role('admin')
-        <li class="nav-item">
-            <a class="nav-link" href="/home/puestos">
-                <i class='bx bxs-pin'></i>
-                <span>Puestos</span>
-            </a>
-        </li>
-        @endrole
+
 
         @role('admin|empleado')
         <li class="nav-item">

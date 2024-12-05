@@ -67,7 +67,7 @@ Route::resource('/home/categorias', CategoriaController::class);
 Route::resource('/home/tallas', TallaController::class);
 Route::resource('/home/tipo_ropas', Tipo_ropaController::class);
 Route::resource('/admin/entradas', EntradaController::class);
-Route::resource('/admin/admin/asig_talla', AsigTallaController::class);
+Route::resource('/admin/asig_talla', AsigTallaController::class);
 Route::resource('/admin/entradas', EntradaController::class);
 Route::resource('/admin/productos', ProductoController::class);
 Route::resource('/admin/venta', VentaController::class);
